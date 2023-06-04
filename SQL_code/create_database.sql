@@ -319,14 +319,14 @@ INNER JOIN borrows b ON b.card_id = m.card_id
 GROUP BY a.admin_id, year(b.b_date)
 HAVING COUNT(a.admin_id) > 20;
 
-/*ISBN, κατηγορία βιβλίου και πλήθος δανεισμών*/
+/*ISBN, κατηγορία βιβλίου και πλήθος δανεισμών, used for query 3.1.6.*/
 CREATE view pop_cat AS
 SELECT a.ISBN, category_name, count(a.ISBN) as total
 FROM borrows a
 INNER JOIN categories b ON a.ISBN=b.ISBN
 GROUP BY 1,2;
 
-/* O συγγραφέας με τα περισσότερα βιβλία */
+/* O συγγραφέας με τα περισσότερα βιβλία, used for query 3.1.7.*/
 CREATE VIEW author_max_books as 
 SELECT COUNT(*) as maxbooks, author_id FROM authors GROUP BY author_id ORDER BY COUNT(*) DESC LIMIT 1;
 
